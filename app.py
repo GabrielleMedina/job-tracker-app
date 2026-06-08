@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template, url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 
 
@@ -22,3 +22,9 @@ with app.app_context():
 @app.route("/")
 def hello_world():
     return "<p>Hello, World! </p>"
+
+@app.route("/applications")
+def applications(): 
+    applications = Application.query.order_by(Application.date_initiated.desc()).all()
+    return render_template("applications.html", applications=applications)
+
