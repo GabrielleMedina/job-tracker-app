@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} Application Tracker {% endblock %}</title>
+</head>
+<body>
+    <nav> 
+        <div>
+            <a href="{{ url_for('dashboard') }}">
+                <span></span>
+                Trade Journal
+            </a>
+
+            <ul>
+                <li>
+                    <a href="{{ url_for('applications')}}">applications</a>
+                </li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+    </nav>
+</body>
+</html>
