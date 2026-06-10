@@ -56,7 +56,7 @@ def new_application():
         
     return render_template("new_application.html")
 
-@app.route("/edit_application/<int:application_id", methods=["GET", "POST"])
+@app.route("/edit_application/<int:application_id>", methods=["GET", "POST"])
 def edit_application(application_id):
     application = db.get_or_404(ApplicationEntry, application_id)
     if request.method == 'POST':
@@ -67,19 +67,30 @@ def edit_application(application_id):
         form_link = request.form['link'].strip()
         form_status = request.form['status'].strip()
 
-        application.company_name=form_company_name,
-        application.position=form_position,
-        application.date_initiated=form_date_initiated,
-        application.date_end=form_date_end,
-        application.link=form_link,
+        application.company_name=form_company_name
+        application.position=form_position
+        application.date_initiated=form_date_initiated
+        application.date_end=form_date_end
+        application.link=form_link
         application.status=form_status
         try: 
             db.session.commit()
             return redirect(url_for('applications'))
         except Exception:
             db.session.rollback()
-            flash('Something went wrong with saving your application. Please try again.', 'error')
+            flash('Something went wrong with editing your application. Please try again.', 'error')
             return redirect(url_for('edit_application', application_id=application_id))
     
-    return render_template("edit_entry.html", application=application)
+    return render_template("edit_application.html", application=application)
 
+@app.route("/delete_application/<int:application_id>", methods=["POST"])
+def delete_application(application_id):
+    application = db.get_or_404(ApplicationEntry, application_id)
+    try: 
+        db.session.delete(application)
+        db.session.commit()
+        return redirect(url_for("applications"))
+    except Exception:
+            db.session.rollback()
+            flash('Something went wrong with deleting your application. Please try again.', 'error')
+            return redirect(url_for('applications'))
