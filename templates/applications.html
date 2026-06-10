@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %} | Trade Journal {% endblock %}
+
+{% block content %}
+
+<section>
+    <div>
+        <h2>All Applications</h2>
+    </div>
+    <a href="{{ url_for('new_application') }}">New Application</a>
+</section>
+
+{% if applications %}
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>Company Name</th>
+                <th>Position</th>
+                <th>Date Initiated</th>
+                <th>Date End</th>
+                <th>Link</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+    </table>
+</div>
