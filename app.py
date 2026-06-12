@@ -20,8 +20,8 @@ with app.app_context():
     db.create_all()
 
 @app.route("/")
-def hello_world():
-    return "<p>Hello, World! </p>"
+def index():
+    return redirect(url_for('applications'))
 
 @app.route("/applications")
 def applications(): 
@@ -34,7 +34,7 @@ def new_application():
         form_company_name = request.form['company_name'].strip()
         form_position = request.form['position'].strip()
         form_date_initiated = datetime.strptime(request.form['date_initiated'], "%Y-%m-%d").date()
-        form_date_end = datetime.strptime(request.form['date_end'], "%Y-%m-%d").date() if request.form['date_end'] else None
+        form_date_end = None
         form_link = request.form['link'].strip()
         form_status = request.form['status'].strip()
 
@@ -50,9 +50,9 @@ def new_application():
             db.session.add(new_application)
             db.session.commit()
             return redirect(url_for('applications'))
-        except Exception:
+        except Exception as e:
+            print(e)
             db.session.rollback()
-            flash('Something went wrong with saving your application. Please try again.', 'error')
         
     return render_template("new_application.html")
 

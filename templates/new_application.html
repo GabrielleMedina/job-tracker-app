@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}New Application | Application Tracker {% endblock %}
+
+{% block content %}
+
+<form action="{{ url_for('new_application') }}" method="POST">
+<div>
+
+    <div>
+        <label for="company_name">Company Name</label>
+        <input type="text" id="company" name="company_name" required>
+    </div>
+    <div>
+        <label for="position">Position</label>
+        <input type="text" id="position" name="position" required>
+    </div>
+
+    <div>
+        <label for="date_initiated">Date Initiated</label>
+        <input type="date" id="date_initiated" name="date_initiated" required>
+    </div>
+    <div>
+        <label for="link">Web Link</label>
+        <input type="text" id="link" name="link">
+    </div>
+    <div>
+        <input type="radio" id="status-ongoing" name="status" value="ongoing">
+        <label for="status">On Going</label>
+        <input type="radio" id="status-interview" name="status" value="interview">
+        <label for="status">Interview</label>
+        <input type="radio" id="status-rejected" name="status" value="rejected">
+        <label for="status">Rejected</label>
+        <input type="radio" id="status-accepted" name="status" value="accepted">
+        <label for="status">Accepted</label>
+    </div>
+
+    <div class="meta-actions">
+            <a href="{{ url_for('applications') }}" class="btn-cancel">Cancel</a>
+            <button type="submit" class="btn-save">Save Entry</button>
+        </div>
+</div>
+</form>
+
+{% endblock %}
