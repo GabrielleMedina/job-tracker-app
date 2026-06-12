@@ -8,7 +8,7 @@
 <body>
     <nav> 
         <div>
-            <a href="{{ url_for('dashboard') }}">
+            <a href="{{ url_for('applications') }}">
                 <span></span>
                 Trade Journal
             </a>
@@ -22,5 +22,10 @@
             </ul>
         </div>
     </nav>
+
+    <main class="">
+        {% block content %}
+        {% endblock %}
+    </main>
 </body>
 </html>
